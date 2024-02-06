@@ -408,7 +408,11 @@ func (p *Portal) grantAccess(ctx context.Context, w http.ResponseWriter, r *http
 	// Add a cookie with identity token, if id_token is available.
 	if rr.Response.IdentityTokenCookie.Enabled {
 		w.Header().Add("Set-Cookie", p.cookie.GetIdentityTokenCookie(rr.Response.IdentityTokenCookie.Name, rr.Response.IdentityTokenCookie.Payload))
-		w.Header().Add("Set-Cookie", p.cookie.GetRefreshTokenCookieName(rr.Response.IdentityTokenCookie.Name, rr.Response.IdentityTokenCookie.Payload))
+	}
+
+	// Add a cookie with refresh token, if refresh_token is available.
+	if rr.Response.RefreshTokenCookie.Enabled {
+		w.Header().Add("Set-Cookie", p.cookie.GetRefreshTokenCookie(rr.Response.RefreshTokenCookie.Name, rr.Response.RefreshTokenCookie.Payload))
 	}
 
 	if rr.Response.Workflow == "json-api" {

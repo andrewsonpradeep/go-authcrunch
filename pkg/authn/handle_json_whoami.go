@@ -81,6 +81,19 @@ func (p *Portal) handleJSONWhoami(ctx context.Context, w http.ResponseWriter, r 
 		return p.handleJSONWhoamiPlain(ctx, w, usr)
 	}
 
+
+		// Check whether the provider has refresh token cookie configured.
+	if provider.GetRefreshTokenCookieName() == "" {
+			p.logger.Debug(
+				"failed returning refresh_token",
+				zap.String("session_id", rr.Upstream.SessionID),
+				zap.String("request_id", rr.ID),
+				zap.String("error", "refresh token cookie name is empty"),
+			)
+			return p.handleJSONWhoamiPlain(ctx, w, usr)
+	
+		}
+
 	// Iterate over cookies to find the identity token cookie.
 	cookie, err := r.Cookie(provider.GetIdentityTokenCookieName())
 	if err != nil {

@@ -39,6 +39,7 @@ type IdentityProvider interface {
 	GetLoginIcon() *icons.LoginIcon
 	GetLogoutURL() string
 	GetIdentityTokenCookieName() string
+	GetRefreshTokenCookieName() string
 }
 
 // NewIdentityProvider returns IdentityProvider instance.

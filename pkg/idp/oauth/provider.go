@@ -484,8 +484,9 @@ func (b *IdentityProvider) GetIdentityTokenCookieName() string {
 	return ""
 }
 
+// GetRefreshTokenCookieName returns the name of the refresh token cookie associated with the provider.
 func (b *IdentityProvider) GetRefreshTokenCookieName() string {
-	if b.config.IdentityTokenCookieEnabled {
+	if b.config.RefreshTokenCookieEnabled {
 		return b.config.RefreshTokenCookieName
 	}
 	return ""

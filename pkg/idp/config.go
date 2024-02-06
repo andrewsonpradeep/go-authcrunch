@@ -87,6 +87,9 @@ func (cfg *IdentityProviderConfig) Validate() error {
 			// ID Token.
 			"identity_token_cookie_enabled",
 			"identity_token_cookie_name",
+			// ID Token.
+			"refresh_token_cookie_enabled",
+			"refresh_token_cookie_name",
 			// Misc.
 			"required_token_fields",
 			"scopes",

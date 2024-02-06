@@ -110,6 +110,11 @@ type Config struct {
 	IdentityTokenCookieName string `json:"identity_token_cookie_name,omitempty" xml:"identity_token_cookie_name,omitempty" yaml:"identity_token_cookie_name,omitempty"`
 	// Enables the storing of id_token from OAuth provider in a HTTP cookie.
 	IdentityTokenCookieEnabled bool `json:"identity_token_cookie_enabled,omitempty" xml:"identity_token_cookie_enabled,omitempty" yaml:"identity_token_cookie_enabled,omitempty"`
+
+	// The name of the cookie storing id_token from OAuth provider.
+	RefreshTokenCookieName string `json:"refresh_token_cookie_name,omitempty" xml:"refresh_token_cookie_name,omitempty" yaml:"refresh_token_cookie_name,omitempty"`
+	// Enables the storing of id_token from OAuth provider in a HTTP cookie.
+	RefreshTokenCookieEnabled bool `json:"refresh_token_cookie_enabled,omitempty" xml:"refresh_token_cookie_enabled,omitempty" yaml:"refresh_token_cookie_enabled,omitempty"`
 }
 
 // Validate validates identity store configuration.
@@ -336,7 +341,11 @@ func (cfg *Config) Validate() error {
 		cfg.IdentityTokenCookieName = defaultIdentityTokenCookieName
 	}
 
-	cfg.RefreshTokenCookieName = defaultRefreshTokenCookieName
+	// Configure default refresh token name.
+	if cfg.RefreshTokenCookieEnabled && cfg.RefreshTokenCookieName == "" {
+		cfg.RefreshTokenCookieName = defaultRefreshTokenCookieName
+	}
+
 
 	return nil
 }

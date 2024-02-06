@@ -47,7 +47,7 @@ func (p *Portal) handleHTTPBasicLogin(ctx context.Context, w http.ResponseWriter
 		w.Write([]byte("Authorization Required"))
 		return nil
 	}
-	if v, exists := credentials["realm"]; exists {
+	if v, exists := credentials["realm"]; exists {``
 		realm = v
 	} else {
 		credentials["realm"] = realm

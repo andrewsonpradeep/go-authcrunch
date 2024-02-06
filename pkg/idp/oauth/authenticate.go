@@ -38,7 +38,7 @@ func (b *IdentityProvider) Authenticate(r *requests.Request) error {
 	r.Response.Code = http.StatusBadRequest
 
 	var accessTokenExists, idTokenExists, refreshTokenExists, codeExists, stateExists, errorExists, loginHintExists, additionalScopesExists bool
-	var reqParamsAccessToken, reqParamsIDToken, reqParamsRefreshTokenExists, reqParamsState, reqParamsCode, reqParamsError, reqParamsLoginHint, additionalScopes string
+	var reqParamsAccessToken, reqParamsIDToken, reqParamsRefreshToken, reqParamsState, reqParamsCode, reqParamsError, reqParamsLoginHint, additionalScopes string
 	reqParams := r.Upstream.Request.URL.Query()
 	if _, exists := reqParams["access_token"]; exists {
 		accessTokenExists = true
@@ -51,7 +51,7 @@ func (b *IdentityProvider) Authenticate(r *requests.Request) error {
 
 	if _, exists := reqParams["refresh_token"]; exists {
 		refreshTokenExists = true
-		reqParamsRefreshTokenExists = reqParams["refresh_token"][0]
+		reqParamsRefreshToken = reqParams["refresh_token"][0]
 	}
 
 	if _, exists := reqParams["code"]; exists {
@@ -169,12 +169,16 @@ func (b *IdentityProvider) Authenticate(r *requests.Request) error {
 				}
 			}
 
-			if v, exists := accessToken["refresh_token"]; exists {
-				r.Response.RefreshTokenCookie.Enabled = true
-				r.Response.RefreshTokenCookie.Name = b.config.RefreshTokenCookieName
-				r.Response.RefreshTokenCookie.Payload = v.(string)
+
+			if b.config.RefreshTokenCookieEnabled {
+				if v, exists := accessToken["refresh_token"]; exists {
+					r.Response.RefreshTokenCookie.Enabled = true
+					r.Response.RefreshTokenCookie.Name = b.config.RefreshTokenCookieName
+					r.Response.RefreshTokenCookie.Payload = v.(string)
+				}
 			}
 
+		
 			r.Response.Payload = m
 			r.Response.Code = http.StatusOK
 			b.logger.Debug(
@@ -203,11 +207,12 @@ func (b *IdentityProvider) Authenticate(r *requests.Request) error {
 				r.Response.IdentityTokenCookie.Payload = reqParamsIDToken
 			}
 
-			if v, exists := accessToken["refresh_token"]; exists {
+			if b.config.RefreshTokenCookieEnabled {
 				r.Response.RefreshTokenCookie.Enabled = true
 				r.Response.RefreshTokenCookie.Name = b.config.RefreshTokenCookieName
-				r.Response.RefreshTokenCookie.Payload = v.(string)
+				r.Response.RefreshTokenCookie.Payload = reqParamsRefreshToken
 			}
+
 
 			b.logger.Debug(
 				"decoded claims from OAuth 2.0 authorization server access token",
