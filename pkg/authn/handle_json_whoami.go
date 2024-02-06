@@ -92,12 +92,24 @@ func (p *Portal) handleJSONWhoami(ctx context.Context, w http.ResponseWriter, r 
 		)
 		return p.handleJSONWhoamiPlain(ctx, w, usr)
 	}
+	
+	refrcookie, referr := r.Cookie(provider.GetRefreshTokenCookieName())
+	if referr != nil {
+		p.logger.Debug(
+			"failed returning refresh_token",
+			zap.String("session_id", rr.Upstream.SessionID),
+			zap.String("request_id", rr.ID),
+			zap.String("error", "refresh token cookie not found"),
+		)
+		return p.handleJSONWhoamiPlain(ctx, w, usr)
+	}
 
 	respMap := make(map[string]interface{})
 	for k, v := range usr.AsMap() {
 		respMap[k] = v
 	}
 	respMap["id_token"] = cookie.Value
+	respMap["refresh_token"] = refrcookie.Value
 	respBytes, _ := json.Marshal(respMap)
 	w.WriteHeader(200)
 	w.Write(respBytes)

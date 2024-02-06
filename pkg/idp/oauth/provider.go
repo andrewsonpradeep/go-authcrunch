@@ -483,3 +483,10 @@ func (b *IdentityProvider) GetIdentityTokenCookieName() string {
 	}
 	return ""
 }
+
+func (b *IdentityProvider) GetRefreshTokenCookieName() string {
+	if b.config.IdentityTokenCookieEnabled {
+		return b.config.RefreshTokenCookieName
+	}
+	return ""
+}

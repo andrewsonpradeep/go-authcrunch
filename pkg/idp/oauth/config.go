@@ -24,6 +24,7 @@ import (
 )
 
 const defaultIdentityTokenCookieName string = "AUTHP_ID_TOKEN"
+const defaultRefreshTokenCookieName string = "AUTHP_REFRESH_TOKEN"
 
 // Config holds the configuration for the IdentityProvider.
 type Config struct {
@@ -169,6 +170,7 @@ func (cfg *Config) Validate() error {
 	switch cfg.IdentityTokenName {
 	case "":
 		cfg.IdentityTokenName = "id_token"
+		cfg.RefreshTokenName = "refresh_token"
 	case "id_token", "access_token":
 	default:
 		return errors.ErrIdentityProviderConfig.WithArgs(
@@ -231,6 +233,7 @@ func (cfg *Config) Validate() error {
 		if cfg.TenantID == "" {
 			cfg.TenantID = "common"
 		}
+		cfg.RequiredTokenFields = []string{"access_token", "id_token","refresh_token"}
 		if cfg.BaseAuthURL == "" {
 			cfg.BaseAuthURL = "https://login.microsoftonline.com/" + cfg.TenantID + "/oauth2/v2.0/"
 			cfg.MetadataURL = "https://login.microsoftonline.com/" + cfg.TenantID + "/v2.0/.well-known/openid-configuration"
@@ -260,7 +263,7 @@ func (cfg *Config) Validate() error {
 	}
 
 	if len(cfg.RequiredTokenFields) < 1 {
-		cfg.RequiredTokenFields = []string{"access_token", "id_token"}
+		cfg.RequiredTokenFields = []string{"access_token", "id_token","refresh_token"}
 	}
 
 	if cfg.BaseAuthURL == "" {
@@ -332,6 +335,8 @@ func (cfg *Config) Validate() error {
 	if cfg.IdentityTokenCookieEnabled && cfg.IdentityTokenCookieName == "" {
 		cfg.IdentityTokenCookieName = defaultIdentityTokenCookieName
 	}
+
+	cfg.RefreshTokenCookieName = defaultRefreshTokenCookieName
 
 	return nil
 }

@@ -37,8 +37,8 @@ func (b *IdentityProvider) Authenticate(r *requests.Request) error {
 	reqPath := r.Upstream.BaseURL + path.Join(r.Upstream.BasePath, r.Upstream.Method, r.Upstream.Realm)
 	r.Response.Code = http.StatusBadRequest
 
-	var accessTokenExists, idTokenExists, codeExists, stateExists, errorExists, loginHintExists, additionalScopesExists bool
-	var reqParamsAccessToken, reqParamsIDToken, reqParamsState, reqParamsCode, reqParamsError, reqParamsLoginHint, additionalScopes string
+	var accessTokenExists, idTokenExists, refreshTokenExists, codeExists, stateExists, errorExists, loginHintExists, additionalScopesExists bool
+	var reqParamsAccessToken, reqParamsIDToken, reqParamsRefreshTokenExists, reqParamsState, reqParamsCode, reqParamsError, reqParamsLoginHint, additionalScopes string
 	reqParams := r.Upstream.Request.URL.Query()
 	if _, exists := reqParams["access_token"]; exists {
 		accessTokenExists = true
@@ -48,6 +48,12 @@ func (b *IdentityProvider) Authenticate(r *requests.Request) error {
 		idTokenExists = true
 		reqParamsIDToken = reqParams["id_token"][0]
 	}
+
+	if _, exists := reqParams["refresh_token"]; exists {
+		refreshTokenExists = true
+		reqParamsRefreshTokenExists = reqParams["refresh_token"][0]
+	}
+
 	if _, exists := reqParams["code"]; exists {
 		codeExists = true
 		reqParamsCode = reqParams["code"][0]
@@ -163,6 +169,12 @@ func (b *IdentityProvider) Authenticate(r *requests.Request) error {
 				}
 			}
 
+			if v, exists := accessToken["refresh_token"]; exists {
+				r.Response.RefreshTokenCookie.Enabled = true
+				r.Response.RefreshTokenCookie.Name = b.config.RefreshTokenCookieName
+				r.Response.RefreshTokenCookie.Payload = v.(string)
+			}
+
 			r.Response.Payload = m
 			r.Response.Code = http.StatusOK
 			b.logger.Debug(
@@ -175,6 +187,7 @@ func (b *IdentityProvider) Authenticate(r *requests.Request) error {
 			accessToken := map[string]interface{}{
 				"access_token": reqParamsAccessToken,
 				"id_token":     reqParamsIDToken,
+				"refresh_token":     reqParamsRefreshToken,
 			}
 			m, err := b.validateAccessToken(reqParamsState, accessToken)
 			if err != nil {
@@ -188,6 +201,12 @@ func (b *IdentityProvider) Authenticate(r *requests.Request) error {
 				r.Response.IdentityTokenCookie.Enabled = true
 				r.Response.IdentityTokenCookie.Name = b.config.IdentityTokenCookieName
 				r.Response.IdentityTokenCookie.Payload = reqParamsIDToken
+			}
+
+			if v, exists := accessToken["refresh_token"]; exists {
+				r.Response.RefreshTokenCookie.Enabled = true
+				r.Response.RefreshTokenCookie.Name = b.config.RefreshTokenCookieName
+				r.Response.RefreshTokenCookie.Payload = v.(string)
 			}
 
 			b.logger.Debug(
