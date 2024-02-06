@@ -15,7 +15,7 @@
 package messaging
 
 import (
-	"github.com/greenpau/go-authcrunch/pkg/errors"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/errors"
 )
 
 // FileProvider represents file messaging provider which writes messages

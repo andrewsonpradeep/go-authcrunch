@@ -17,8 +17,8 @@ package authn
 import (
 	"context"
 	"encoding/json"
-	"github.com/greenpau/go-authcrunch/pkg/requests"
-	"github.com/greenpau/go-authcrunch/pkg/user"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/requests"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/user"
 	"net/http"
 	"time"
 )

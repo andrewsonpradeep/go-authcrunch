@@ -16,7 +16,7 @@ package qr
 
 import (
 	"fmt"
-	"github.com/greenpau/go-authcrunch/internal/tests"
+	"github.com/andrewsonpradeep/go-authcrunch/internal/tests"
 	"testing"
 )
 

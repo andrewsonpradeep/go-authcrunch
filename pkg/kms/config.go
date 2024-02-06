@@ -17,8 +17,8 @@ package kms
 import (
 	"encoding/csv"
 	"fmt"
-	"github.com/greenpau/go-authcrunch/pkg/errors"
-	cfgutil "github.com/greenpau/go-authcrunch/pkg/util/cfg"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/errors"
+	cfgutil "github.com/andrewsonpradeep/go-authcrunch/pkg/util/cfg"
 
 	"os"
 	"sort"

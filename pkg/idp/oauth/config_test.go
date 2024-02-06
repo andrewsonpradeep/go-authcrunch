@@ -16,9 +16,9 @@ package oauth
 
 import (
 	"fmt"
-	"github.com/greenpau/go-authcrunch/internal/tests"
-	"github.com/greenpau/go-authcrunch/pkg/authn/icons"
-	"github.com/greenpau/go-authcrunch/pkg/errors"
+	"github.com/andrewsonpradeep/go-authcrunch/internal/tests"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/authn/icons"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/errors"
 	"testing"
 )
 

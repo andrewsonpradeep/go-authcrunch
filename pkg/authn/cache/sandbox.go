@@ -20,7 +20,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/greenpau/go-authcrunch/pkg/user"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/user"
 )
 
 const defaultSandboxCleanupInternal int = 60

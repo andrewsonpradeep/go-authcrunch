@@ -15,8 +15,8 @@
 package cache
 
 import (
-	"github.com/greenpau/go-authcrunch/pkg/errors"
-	"github.com/greenpau/go-authcrunch/pkg/user"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/errors"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/user"
 	"sync"
 	"time"
 )

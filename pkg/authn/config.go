@@ -15,14 +15,14 @@
 package authn
 
 import (
-	"github.com/greenpau/go-authcrunch/pkg/acl"
-	"github.com/greenpau/go-authcrunch/pkg/authn/cookie"
-	"github.com/greenpau/go-authcrunch/pkg/authn/transformer"
-	"github.com/greenpau/go-authcrunch/pkg/authn/ui"
-	"github.com/greenpau/go-authcrunch/pkg/authz/options"
-	"github.com/greenpau/go-authcrunch/pkg/errors"
-	"github.com/greenpau/go-authcrunch/pkg/kms"
-	cfgutil "github.com/greenpau/go-authcrunch/pkg/util/cfg"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/acl"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/authn/cookie"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/authn/transformer"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/authn/ui"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/authz/options"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/errors"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/kms"
+	cfgutil "github.com/andrewsonpradeep/go-authcrunch/pkg/util/cfg"
 	"strings"
 )
 

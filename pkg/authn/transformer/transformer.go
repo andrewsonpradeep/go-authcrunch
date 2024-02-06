@@ -17,8 +17,8 @@ package transformer
 import (
 	"context"
 	"fmt"
-	"github.com/greenpau/go-authcrunch/pkg/acl"
-	cfgutil "github.com/greenpau/go-authcrunch/pkg/util/cfg"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/acl"
+	cfgutil "github.com/andrewsonpradeep/go-authcrunch/pkg/util/cfg"
 	"strings"
 )
 

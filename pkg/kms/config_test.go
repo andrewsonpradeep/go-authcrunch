@@ -17,8 +17,8 @@ package kms
 import (
 	"fmt"
 	"github.com/google/go-cmp/cmp"
-	"github.com/greenpau/go-authcrunch/internal/tests"
-	"github.com/greenpau/go-authcrunch/pkg/errors"
+	"github.com/andrewsonpradeep/go-authcrunch/internal/tests"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/errors"
 	"os"
 	"testing"
 )

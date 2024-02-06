@@ -15,9 +15,9 @@
 package testutils
 
 import (
-	"github.com/greenpau/go-authcrunch/internal/tests"
-	"github.com/greenpau/go-authcrunch/pkg/identity"
-	"github.com/greenpau/go-authcrunch/pkg/requests"
+	"github.com/andrewsonpradeep/go-authcrunch/internal/tests"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/identity"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/requests"
 	"path/filepath"
 )
 

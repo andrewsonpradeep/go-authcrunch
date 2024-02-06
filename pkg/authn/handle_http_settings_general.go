@@ -17,11 +17,11 @@ package authn
 import (
 	"context"
 	"fmt"
-	"github.com/greenpau/go-authcrunch/pkg/authn/enums/operator"
-	"github.com/greenpau/go-authcrunch/pkg/identity"
-	"github.com/greenpau/go-authcrunch/pkg/ids"
-	"github.com/greenpau/go-authcrunch/pkg/requests"
-	"github.com/greenpau/go-authcrunch/pkg/user"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/authn/enums/operator"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/identity"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/ids"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/requests"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/user"
 	"net/http"
 )
 

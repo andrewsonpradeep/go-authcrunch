@@ -19,14 +19,14 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/greenpau/go-authcrunch/pkg/acl"
-	"github.com/greenpau/go-authcrunch/pkg/authproxy"
-	"github.com/greenpau/go-authcrunch/pkg/authz/cache"
-	"github.com/greenpau/go-authcrunch/pkg/authz/options"
-	"github.com/greenpau/go-authcrunch/pkg/errors"
-	"github.com/greenpau/go-authcrunch/pkg/kms"
-	"github.com/greenpau/go-authcrunch/pkg/user"
-	addrutil "github.com/greenpau/go-authcrunch/pkg/util/addr"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/acl"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/authproxy"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/authz/cache"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/authz/options"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/errors"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/kms"
+	"github.com/andrewsonpradeep/go-authcrunch/pkg/user"
+	addrutil "github.com/andrewsonpradeep/go-authcrunch/pkg/util/addr"
 )
 
 type guardian interface {
