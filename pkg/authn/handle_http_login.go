@@ -408,7 +408,7 @@ func (p *Portal) grantAccess(ctx context.Context, w http.ResponseWriter, r *http
 	// Add a cookie with identity token, if id_token is available.
 	if rr.Response.IdentityTokenCookie.Enabled {
 		w.Header().Add("Set-Cookie", p.cookie.GetIdentityTokenCookie(rr.Response.IdentityTokenCookie.Name, rr.Response.IdentityTokenCookie.Payload))
-		w.Header().Add("Set-Cookie", p.cookie.GetRefreshTokenCookieName(rr.Response.RefreshTokenCookie.Name, rr.Response.RefreshTokenCookie.Payload))
+		w.Header().Add("Set-Cookie", p.cookie.GetRefreshTokenCookieName(rr.Response.IdentityTokenCookie.Name, rr.Response.IdentityTokenCookie.Payload))
 	}
 
 	if rr.Response.Workflow == "json-api" {
